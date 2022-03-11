@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ML" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ML" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:61219/Service1.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="Alumnos">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Alumno" nillable="true" type="q1:ArrayOfanyType" />
+      <xs:element minOccurs="0" name="ApellidoMaterno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ApellidoPaterno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaNacimiento" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Matricula" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Alumnos" nillable="true" type="tns:Alumnos" />
+  <xs:complexType name="RecetasAlumnos">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Alumno" nillable="true" type="tns:Alumnos" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdReceta" type="xs:int" />
+      <xs:element minOccurs="0" name="Matricula" type="xs:int" />
+      <xs:element minOccurs="0" name="Receta" nillable="true" type="tns:Receta" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="RecetaAlumno" nillable="true" type="q2:ArrayOfanyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RecetasAlumnos" nillable="true" type="tns:RecetasAlumnos" />
+  <xs:complexType name="Receta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Diagnostico" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdReceta" type="xs:int" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Recetas" nillable="true" type="q3:ArrayOfanyType" />
+      <xs:element minOccurs="0" name="Tratamiento" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Receta" nillable="true" type="tns:Receta" />
+</xs:schema>

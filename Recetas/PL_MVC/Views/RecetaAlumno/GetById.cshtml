@@ -1,0 +1,61 @@
+﻿@model ML.RecetasAlumnos
+@{ ViewBag.Title = "Detalle";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="container">
+    <div class="row">
+        <h2>Recetas</h2>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Detalle de las recetas de cada alumno</h5>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div style="float:right">
+                @Html.ActionLink("+", "Form", "RecetaAlumno", htmlAttributes: new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <td class="hidden">Matricula</td>
+                    <td class="text-center" style=" font-weight:bold;">Editar</td>
+                    <td class="text-center" style=" font-weight:bold;">Fecha</td>
+                    <td class="text-center" style=" font-weight:bold;">Diagnostico</td>
+                    @*<td class="text-center" style=" font-weight:bold;">Stock</td>*@
+                    <td class="text-center" style=" font-weight:bold;">Tratamiento</td>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.RecetasAlumnos ventaProducto in Model.RecetaAlumno)
+                {
+    <tr>
+        @* <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Producto", new { IdProducto = ventaProducto.Producto.IdProducto })"></a></td>*@
+
+        @**@
+        <td class="hidden">@ventaProducto.Alumno.Matricula</td>
+        <td><center><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "RecetaAlumno", new { ventaProducto.Receta.IdReceta })"></a></center></td>
+        <td>@ventaProducto.Receta.Fecha</td>
+        <td class="text-center">@ventaProducto.Receta.Diagnostico</td>
+        @*<td class="text-center">@ventaProducto.Producto.Stock</td>*@
+        <td>@ventaProducto.Receta.Tratamiento</td>
+    </tr>}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+

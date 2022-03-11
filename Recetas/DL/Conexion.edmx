@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RecetasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumnos">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="70" />
+          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Receta">
+          <Key>
+            <PropertyRef Name="IdReceta" />
+          </Key>
+          <Property Name="IdReceta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Diagnostico" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tratamiento" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecetasAlumnos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdReceta" Type="int" />
+          <Property Name="Matricula" Type="int" />
+        </EntityType>
+        <Association Name="FK__RecetasAl__IdRec__286302EC">
+          <End Role="Receta" Type="Self.Receta" Multiplicity="0..1" />
+          <End Role="RecetasAlumnos" Type="Self.RecetasAlumnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receta">
+              <PropertyRef Name="IdReceta" />
+            </Principal>
+            <Dependent Role="RecetasAlumnos">
+              <PropertyRef Name="IdReceta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecetasAl__Matri__29572725">
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="0..1" />
+          <End Role="RecetasAlumnos" Type="Self.RecetasAlumnos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="RecetasAlumnos">
+              <PropertyRef Name="Matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AllumnosGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="AlumnoGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Matricula" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RecetaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Matricula" Type="int" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="Diagnostico" Type="varchar" Mode="In" />
+          <Parameter Name="Tratamiento" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="RecetaGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdReceta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RecetasAlumnosGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateReceta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Diagnostico" Type="varchar" Mode="In" />
+          <Parameter Name="Tratamiento" Type="varchar" Mode="In" />
+          <Parameter Name="IdReceta" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="RecetasModelStoreContainer">
+          <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receta" EntityType="Self.Receta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecetasAlumnos" EntityType="Self.RecetasAlumnos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__RecetasAl__IdRec__286302EC" Association="Self.FK__RecetasAl__IdRec__286302EC">
+            <End Role="Receta" EntitySet="Receta" />
+            <End Role="RecetasAlumnos" EntitySet="RecetasAlumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecetasAl__Matri__29572725" Association="Self.FK__RecetasAl__Matri__29572725">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="RecetasAlumnos" EntitySet="RecetasAlumnos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RecetasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RecetasAlumnos" Relationship="Self.FK__RecetasAl__Matri__29572725" FromRole="Alumnos" ToRole="RecetasAlumnos" />
+        </EntityType>
+        <EntityType Name="Receta">
+          <Key>
+            <PropertyRef Name="IdReceta" />
+          </Key>
+          <Property Name="IdReceta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Diagnostico" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tratamiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RecetasAlumnos" Relationship="Self.FK__RecetasAl__IdRec__286302EC" FromRole="Receta" ToRole="RecetasAlumnos" />
+        </EntityType>
+        <EntityType Name="RecetasAlumno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdReceta" Type="Int32" />
+          <Property Name="Matricula" Type="Int32" />
+          <NavigationProperty Name="Alumno" Relationship="Self.FK__RecetasAl__Matri__29572725" FromRole="RecetasAlumnos" ToRole="Alumnos" />
+          <NavigationProperty Name="Receta" Relationship="Self.FK__RecetasAl__IdRec__286302EC" FromRole="RecetasAlumnos" ToRole="Receta" />
+        </EntityType>
+        <Association Name="FK__RecetasAl__Matri__29572725">
+          <End Role="Alumnos" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="RecetasAlumnos" Type="Self.RecetasAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="RecetasAlumnos">
+              <PropertyRef Name="Matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecetasAl__IdRec__286302EC">
+          <End Role="Receta" Type="Self.Receta" Multiplicity="0..1" />
+          <End Role="RecetasAlumnos" Type="Self.RecetasAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receta">
+              <PropertyRef Name="IdReceta" />
+            </Principal>
+            <Dependent Role="RecetasAlumnos">
+              <PropertyRef Name="IdReceta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RecetasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumnos" EntityType="Self.Alumno" />
+          <EntitySet Name="Recetas" EntityType="Self.Receta" />
+          <EntitySet Name="RecetasAlumnos" EntityType="Self.RecetasAlumno" />
+          <AssociationSet Name="FK__RecetasAl__Matri__29572725" Association="Self.FK__RecetasAl__Matri__29572725">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="RecetasAlumnos" EntitySet="RecetasAlumnos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecetasAl__IdRec__286302EC" Association="Self.FK__RecetasAl__IdRec__286302EC">
+            <End Role="Receta" EntitySet="Recetas" />
+            <End Role="RecetasAlumnos" EntitySet="RecetasAlumnos" />
+          </AssociationSet>
+          <FunctionImport Name="AllumnosGetAll" ReturnType="Collection(RecetasModel.AllumnosGetAll_Result)" />
+          <FunctionImport Name="RecetasAlumnosGetById" ReturnType="Collection(RecetasModel.RecetasAlumnosGetById_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoGetById" ReturnType="Collection(RecetasModel.AlumnoGetById_Result)">
+          <Parameter Name="Matricula" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateReceta">
+            <Parameter Name="Diagnostico" Mode="In" Type="String" />
+            <Parameter Name="Tratamiento" Mode="In" Type="String" />
+            <Parameter Name="IdReceta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RecetaGetById" ReturnType="Collection(RecetasModel.RecetaGetById_Result)">
+          <Parameter Name="IdReceta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RecetaAdd">
+            <Parameter Name="Matricula" Mode="In" Type="Int32" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Diagnostico" Mode="In" Type="String" />
+            <Parameter Name="Tratamiento" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="AllumnosGetAll_Result">
+          <Property Type="Int32" Name="Matricula" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="70" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="RecetasAlumnosGetById_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="IdReceta" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Diagnostico" Nullable="false" />
+          <Property Type="String" Name="Tratamiento" Nullable="false" />
+          <Property Type="Int32" Name="Matricula" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="70" />
+        </ComplexType>
+        <ComplexType Name="AlumnoGetById_Result">
+          <Property Type="Int32" Name="Matricula" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="70" />
+        </ComplexType>
+        <ComplexType Name="RecetaGetById_Result">
+          <Property Type="Int32" Name="IdReceta" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Diagnostico" Nullable="false" />
+          <Property Type="String" Name="Tratamiento" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RecetasModelStoreContainer" CdmEntityContainer="RecetasEntities">
+          <EntitySetMapping Name="Alumnos">
+            <EntityTypeMapping TypeName="RecetasModel.Alumno">
+              <MappingFragment StoreEntitySet="Alumnos">
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recetas">
+            <EntityTypeMapping TypeName="RecetasModel.Receta">
+              <MappingFragment StoreEntitySet="Receta">
+                <ScalarProperty Name="IdReceta" ColumnName="IdReceta" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+                <ScalarProperty Name="Tratamiento" ColumnName="Tratamiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecetasAlumnos">
+            <EntityTypeMapping TypeName="RecetasModel.RecetasAlumno">
+              <MappingFragment StoreEntitySet="RecetasAlumnos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdReceta" ColumnName="IdReceta" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AllumnosGetAll" FunctionName="RecetasModel.Store.AllumnosGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RecetasModel.AllumnosGetAll_Result">
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RecetasAlumnosGetById" FunctionName="RecetasModel.Store.RecetasAlumnosGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RecetasModel.RecetasAlumnosGetById_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdReceta" ColumnName="IdReceta" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+                <ScalarProperty Name="Tratamiento" ColumnName="Tratamiento" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoGetById" FunctionName="RecetasModel.Store.AlumnoGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RecetasModel.AlumnoGetById_Result">
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateReceta" FunctionName="RecetasModel.Store.UpdateReceta" />
+          <FunctionImportMapping FunctionImportName="RecetaGetById" FunctionName="RecetasModel.Store.RecetaGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RecetasModel.RecetaGetById_Result">
+                <ScalarProperty Name="IdReceta" ColumnName="IdReceta" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+                <ScalarProperty Name="Tratamiento" ColumnName="Tratamiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RecetaAdd" FunctionName="RecetasModel.Store.RecetaAdd" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

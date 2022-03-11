@@ -1,0 +1,55 @@
+﻿@model ML.Alumnos
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>Alumnos</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Seleccione un Alumno para ver su información</h5>
+            <hr />
+        </div>
+    </div>
+
+
+
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <td class="text-center" style=" font-weight:bold;">Recetas</td>
+
+
+                <td class="text-center" style="font-weight:bold;">Nombre</td>
+
+                <td class="text-center" style=" font-weight:bold;">Apellido Paterno</td>
+
+                <td class="text-center" style=" font-weight:bold;">Apellido Materno</td>
+
+                <td class="text-center" style=" font-weight:bold;">Fecha de Nacimiento</td>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (ML.Alumnos alumno in Model.Alumno)
+            {
+            <tr>
+                <td><center><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("GetById", "RecetaAlumno", new { Matricula= alumno.Matricula })"></a></center></td>
+                <td>@alumno.Nombre</td>
+                <td class="text-center">@alumno.ApellidoPaterno</td>
+                <td class="text-center">@alumno.ApellidoMaterno</td>
+                <td class="text-center">@alumno.FechaNacimiento</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    @*</div>*@
+</div>
+@*<br />*@
+
+

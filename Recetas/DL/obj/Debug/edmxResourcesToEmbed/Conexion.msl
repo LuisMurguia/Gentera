@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RecetasModelStoreContainer" CdmEntityContainer="RecetasEntities">
+    <EntitySetMapping Name="Alumnos">
+      <EntityTypeMapping TypeName="RecetasModel.Alumno">
+        <MappingFragment StoreEntitySet="Alumnos">
+          <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recetas">
+      <EntityTypeMapping TypeName="RecetasModel.Receta">
+        <MappingFragment StoreEntitySet="Receta">
+          <ScalarProperty Name="IdReceta" ColumnName="IdReceta" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+          <ScalarProperty Name="Tratamiento" ColumnName="Tratamiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RecetasAlumnos">
+      <EntityTypeMapping TypeName="RecetasModel.RecetasAlumno">
+        <MappingFragment StoreEntitySet="RecetasAlumnos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdReceta" ColumnName="IdReceta" />
+          <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AllumnosGetAll" FunctionName="RecetasModel.Store.AllumnosGetAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RecetasModel.AllumnosGetAll_Result">
+          <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="RecetasAlumnosGetById" FunctionName="RecetasModel.Store.RecetasAlumnosGetById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RecetasModel.RecetasAlumnosGetById_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdReceta" ColumnName="IdReceta" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+          <ScalarProperty Name="Tratamiento" ColumnName="Tratamiento" />
+          <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AlumnoGetById" FunctionName="RecetasModel.Store.AlumnoGetById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RecetasModel.AlumnoGetById_Result">
+          <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateReceta" FunctionName="RecetasModel.Store.UpdateReceta" />
+    <FunctionImportMapping FunctionImportName="RecetaGetById" FunctionName="RecetasModel.Store.RecetaGetById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RecetasModel.RecetaGetById_Result">
+          <ScalarProperty Name="IdReceta" ColumnName="IdReceta" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+          <ScalarProperty Name="Tratamiento" ColumnName="Tratamiento" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="RecetaAdd" FunctionName="RecetasModel.Store.RecetaAdd" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RecetasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Alumnos">
+    <Key>
+      <PropertyRef Name="Matricula" />
+    </Key>
+    <Property Name="Matricula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="70" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="70" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="70" />
+    <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Receta">
+    <Key>
+      <PropertyRef Name="IdReceta" />
+    </Key>
+    <Property Name="IdReceta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Diagnostico" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tratamiento" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RecetasAlumnos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdReceta" Type="int" />
+    <Property Name="Matricula" Type="int" />
+  </EntityType>
+  <Association Name="FK__RecetasAl__IdRec__286302EC">
+    <End Role="Receta" Type="Self.Receta" Multiplicity="0..1" />
+    <End Role="RecetasAlumnos" Type="Self.RecetasAlumnos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Receta">
+        <PropertyRef Name="IdReceta" />
+      </Principal>
+      <Dependent Role="RecetasAlumnos">
+        <PropertyRef Name="IdReceta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RecetasAl__Matri__29572725">
+    <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="0..1" />
+    <End Role="RecetasAlumnos" Type="Self.RecetasAlumnos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alumnos">
+        <PropertyRef Name="Matricula" />
+      </Principal>
+      <Dependent Role="RecetasAlumnos">
+        <PropertyRef Name="Matricula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AllumnosGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="AlumnoGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Matricula" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RecetaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Matricula" Type="int" Mode="In" />
+    <Parameter Name="Fecha" Type="datetime" Mode="In" />
+    <Parameter Name="Diagnostico" Type="varchar" Mode="In" />
+    <Parameter Name="Tratamiento" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="RecetaGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdReceta" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RecetasAlumnosGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateReceta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Diagnostico" Type="varchar" Mode="In" />
+    <Parameter Name="Tratamiento" Type="varchar" Mode="In" />
+    <Parameter Name="IdReceta" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="RecetasModelStoreContainer">
+    <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Receta" EntityType="Self.Receta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecetasAlumnos" EntityType="Self.RecetasAlumnos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__RecetasAl__IdRec__286302EC" Association="Self.FK__RecetasAl__IdRec__286302EC">
+      <End Role="Receta" EntitySet="Receta" />
+      <End Role="RecetasAlumnos" EntitySet="RecetasAlumnos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RecetasAl__Matri__29572725" Association="Self.FK__RecetasAl__Matri__29572725">
+      <End Role="Alumnos" EntitySet="Alumnos" />
+      <End Role="RecetasAlumnos" EntitySet="RecetasAlumnos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
